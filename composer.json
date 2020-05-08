@@ -1,0 +1,68 @@
+{
+    "name": "laraketai/cloud-payments-laravel",
+    "description": "Cloud Payments PHP-client",
+    "keywords": [
+        "cloud-payments",
+        "laravel"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^7.2.5",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^6.5",
+        "guzzlehttp/psr7": "^1.6",
+        "psr/http-client": "~1.0",
+        "tarampampam/wrappers-php": "^1.2"
+    },
+    "require-dev": {
+        "laravel/laravel": "^5.5 || ^6.0 || ^7.0",
+        "phpstan/phpstan": "^0.12",
+        "phpunit/phpunit": "^8.5",
+        "tarampampam/guzzle-url-mock": "^1.1"
+    },
+    "authors": [
+        {
+            "name": "laraketai",
+            "email": "g.astakhoff@gmail.com"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": {
+            "Tamaco\\CloudPayments\\": "src/"
+        }
+    },
+
+    "autoload-dev": {
+        "psr-4": {
+            "Tamaco\\Tests\\": "tests/"
+        }
+    },
+
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Tamaco\\CloudPayments\\Frameworks\\Laravel\\ServiceProvider"
+            ]
+        }
+    },
+
+    "scripts": {
+        "phpunit": "@php ./vendor/bin/phpunit --no-coverage --colors=always --testsuite=Unit",
+        "phpunit-cover": "@php ./vendor/bin/phpunit --testsuite=Unit --coverage-html='./coverage/html'",
+        "phpstan": "@php ./vendor/bin/phpstan analyze -c ./phpstan.neon.dist --no-progress --ansi",
+        "test": [
+            "@phpstan",
+            "@phpunit"
+        ],
+        "test-cover": [
+            "@phpstan",
+            "@phpunit-cover"
+        ]
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "prefer-stable": true
+}
