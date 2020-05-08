@@ -11,7 +11,7 @@ The package provides easy way to use [Cloud Payments API](https://developers.clo
 Require this package with composer using the following command:
 
 ```shell
-$ composer require laraketai/cloud-payments-laravel
+$ composer require laraketai/cloudpayments
 ```
 
 > Installed `composer` is required ([how to install composer][getcomposer]).
