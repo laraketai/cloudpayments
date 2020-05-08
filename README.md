@@ -184,10 +184,7 @@ $ make test
 
 ## Changes log
 
-Changes log can be [found here][link_changeslog].
-
-
 ## License
 
-This is open-sourced software licensed under the [MIT License][link_license].
+This is open-sourced software licensed under the MIT License
 
