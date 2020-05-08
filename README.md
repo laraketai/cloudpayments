@@ -184,17 +184,8 @@ $ make test
 
 ## Changes log
 
-[![Release date][badge_release_date]][link_releases]
-[![Commits since latest release][badge_commits_since_release]][link_commits]
-
 Changes log can be [found here][link_changeslog].
 
-## Support
-
-[![Issues][badge_issues]][link_issues]
-[![Issues][badge_pulls]][link_pulls]
-
-If you will find any package errors, please, [make an issue][link_create_issue] in current repository.
 
 ## License
 
