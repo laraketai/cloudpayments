@@ -1,8 +1,8 @@
 {
-    "name": "laraketai/cloud-payments-laravel",
+    "name": "laraketai/cloudpayments",
     "description": "Cloud Payments PHP-client",
     "keywords": [
-        "cloud-payments",
+        "cloudpayments",
         "laravel"
     ],
     "type": "library",
