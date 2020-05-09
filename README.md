@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://hsto.org/webt/q7/hk/ku/q7hkkufaehx9vc-st5qnsw7_i7o.png" alt="logo" width="128" />
-</p>
-
 # Cloud Payments PHP-client
 
 The package provides easy way to use [Cloud Payments API](https://developers.cloudpayments.ru/#api).
@@ -14,11 +10,7 @@ Require this package with composer using the following command:
 $ composer require laraketai/cloudpayments
 ```
 
-> Installed `composer` is required ([how to install composer][getcomposer]).
-
 ## Configuration
-
-> You can find laravel framework integration [here](#frameworks-integration)
 
 For client configuration use `Config` instance. It constructor require **Public ID** and **API Secret**
 that you can find in ClodPayments personal area.
