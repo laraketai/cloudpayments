@@ -1,19 +1,19 @@
-# Cloud Payments PHP-client
+# Cloud Payments PHP-клиент
 
-The package provides easy way to use [Cloud Payments API](https://developers.cloudpayments.ru/#api).
+Пакет предоставляет простой способ использования [Cloud Payments API](https://developers.cloudpayments.ru/#api).
 
-## Install
+## Установка
 
-Require this package with composer using the following command:
+Для этого пакета с composer, используя следующую команду:
 
 ```shell
 $ composer require laraketai/cloudpayments
 ```
 
-## Configuration
+## Конфигурация
 
-For client configuration use `Config` instance. It constructor require **Public ID** and **API Secret**
-that you can find in ClodPayments personal area.
+Для настройки клиента используйте экземпляр `Config`. Это конструктор требует ** Public ID ** и ** API Secret **
+котопый вы можете найти в личном кабинете ClodPayments.
 
 ```php
 use Tamaco\CloudPayments\Config;
@@ -21,22 +21,22 @@ use Tamaco\CloudPayments\Config;
 $config = new Config('pk_some_key', 'some_api_key');
 ```
 
-## Usage
+## Применение
 
-Select one of [requset builders](#request-builders):
+Выберите один из [requset builders](#request-builders):
 
 ```php
 $request_builder = new CardsAuthRequestBuilder;
 ```
 
-Set all necessary parameters through the setters:
+Установите все необходимые параметры с помощью установщиков:
 
 ```php
 $request_builder->setAccountId('some_id');
 $request_builder->setName('name');
 ```
 
-Get PSR7 request:
+PSR7 запрос:
 
 ```php
 use Psr\Http\Message\RequestInterface;
@@ -45,7 +45,7 @@ use Psr\Http\Message\RequestInterface;
 $request = $request_builder->buildRequest();
 ```
 
-Set up client, and send the request:
+Настройте клиент и отправьте запрос:
 
 ```php
 use Tamaco\CloudPayments\Config;
@@ -59,11 +59,11 @@ $clinet = new Client(new GuzzleClient, new Config('public_id', 'api_key'));
 $response = $client->send($request);
 ```
 
-## Api client
+## Api клиент
 
-### Constructing
+### Конструктор
 
-Constructor requires any `GuzzleHttp\ClientInterface` instance and `Config` instance
+Конструктору требуется любой экземпляр `GuzzleHttp \ ClientInterface` и экземпляр` Config`
 
 ```php
 use Tamaco\CloudPayments\Client;
@@ -72,12 +72,13 @@ use GuzzleHttp\Client as GuzzleClient;
 $client = new Client(new GuzzleClient, $config);
 ```
 
-### Sending
+### Отправка
 
-This method allows to send any `Psr\Http\Message\RequestInterface` and returns only `Psr\Http\Message\ResponseInterface`,
-that allow you to build own requests as you want or use one of provided requests builders.
+Этот метод позволяет отправить любой `Psr \ Http \ Message \ RequestInterface` 
+и возвращает только` Psr \ Http \ Message \ ResponseInterface`,
+которые позволяют вам создавать собственные запросы по своему усмотрению или использовать один из предоставленных конструкторов запросов.
 
-This client does only one thing: authorizes requests for CloudPayments and sends them.
+Этот клиент делает только одно: авторизует запросы на CloudPayments и отправляет их.
 
 ```php
 use GuzzleHttp\Psr7\Request;
@@ -89,9 +90,9 @@ $response = $client->send($request);
 
 ## Request builders
 
-Supported builders:
+Поддерживаемые builders:
 
-Builder | Description | Documentation link
+Builder | Описание | Ссылка на документацию
 :----- | :---------- | :----:
 `TestRequestBuilder` | The method to test the interaction with the API | [Link][method_test_doc]
 `CardsAuthRequestBuilder` | The method to make a payment by a cryptogram | [Link][method_payment_by_cryptogram]
@@ -109,29 +110,29 @@ Builder | Description | Documentation link
 
 > How to get [card cryptogram packet](https://developers.cloudpayments.ru/#skript-checkout)?
 
-### Idempotency
+### Идемпотентность
 
-**Idempotency** is an ability of API to produce the same result as the first one without re-processing in case of repeated requests. That means you can send several requests to the system with the same identifier, and only one request will be processed. All the responses will be identical. Thus the protection against network errors is implemented which can lead to creation of duplicate records and actions.
+**Идемпотентность** — свойство API при повторном запросе выдавать тот же результат, что на первичный без повторной обработки. Это значит, что вы можете отправить несколько запросов к системе с одинаковым идентификатором, при этом обработан будет только один запрос, а все ответы будут идентичными. Таким образом реализуется защита от сетевых ошибок, которые приводят к созданию дублированных записей и действий.
+Для включения идемпотентности необходимо в запросе к API передавать заголовок с ключом `setRequestId('request_id')`, содержащий уникальный идентификатор. Формирование идентификатора запроса остается на вашей стороне — это может быть guid, комбинация из номера заказа, даты и суммы или любое другое значение на ваше усмотрение.
+Каждый новый запрос, который необходимо обработать, должен включать новое значение `request_id`. Обработанный результат хранится в системе в течение 1 часа.
 
-To enable idempotency, it is necessary to call `setRequestId('request_id')` method with a unique identifier in API request. Generation of request identifier remains on your side - it can be a guid, a combination of an order number, date and amount, or other values of your choice. Each new request that needs to be processed must include new `request_id` value. The processed result is stored in the system for 1 hour.
+[method_test_doc]:https://developers.cloudpayments.ru/#testovyy-metod
+[method_payment_by_cryptogram]:https://developers.cloudpayments.ru/#oplata-po-kriptogramme
+[method_payment_3ds]:https://developers.cloudpayments.ru/#obrabotka-3-d-secure
+[method_payment_token]:https://developers.cloudpayments.ru/#oplata-po-tokenu-rekarring
+[method_payment_confirm]:https://developers.cloudpayments.ru/#podtverzhdenie-oplaty
+[method_payment_cancel]:https://developers.cloudpayments.ru/#otmena-oplaty
+[method_subscription_create]:https://developers.cloudpayments.ru/#sozdanie-podpiski-na-rekurrentnye-platezhi
+[method_subscription_get]:https://developers.cloudpayments.ru/#zapros-informatsii-o-podpiske
+[method_subscription_find]:https://developers.cloudpayments.ru/#poisk-podpisok
+[method_subscription_update]:https://developers.cloudpayments.ru/#izmenenie-podpiski-na-rekurrentnye-platezhi
+[method_subscription_cancel]:https://developers.cloudpayments.ru/#otmena-podpiski-na-rekurrentnye-platezhi
 
-[method_test_doc]:https://developers.cloudpayments.ru/en/#test-method
-[method_payment_by_cryptogram]:https://developers.cloudpayments.ru/en/#payment-by-a-cryptogram
-[method_payment_3ds]:https://developers.cloudpayments.ru/en/#3-d-secure-processing
-[method_payment_token]:https://developers.cloudpayments.ru/en/#payment-by-a-token-recurring
-[method_payment_confirm]:https://developers.cloudpayments.ru/en/#payment-confirmation
-[method_payment_cancel]:https://developers.cloudpayments.ru/en/#payment-cancellation
-[method_subscription_create]:https://developers.cloudpayments.ru/en/#creation-of-subscriptions-on-recurrent-payments
-[method_subscription_get]:https://developers.cloudpayments.ru/en/#subscription-details
-[method_subscription_find]:https://developers.cloudpayments.ru/en/#subscriptions-search
-[method_subscription_update]:https://developers.cloudpayments.ru/en/#recurrent-payments-subscription-change
-[method_subscription_cancel]:https://developers.cloudpayments.ru/en/#subscription-on-recurrent-payments-cancellation
-
-## Frameworks integration
+## Интеграция фреймворка
 
 ### Laravel
 
-Laravel 5.5 and above uses Package Auto-Discovery, so doesn't require you to manually register the service-provider. Otherwise you must add the service provider to the `providers` array in `./config/app.php`:
+Laravel 5.5 и выше использует автоматическое обнаружение пакетов, поэтому не требуется вручную регистрировать поставщика услуг. В противном случае вы должны добавить сервис-провайдера в массив `provider` в`. / Config / app.php`:
 
 ```php
 'providers' => [
@@ -140,11 +141,11 @@ Laravel 5.5 and above uses Package Auto-Discovery, so doesn't require you to man
 ]
 ```
 
-#### Laravel configuration
+#### Laravel конфигурация
 
-Service provider pick configuration from `services.cloud_payments` config. So you need to put it into
-`config/services.php` file.
-For example:
+Поставщик услуг выбирает конфигурацию из конфигурации `services.cloud_payments`. Вам требуется прописать его в
+Файл `config / services.php`.
+Например:
 
 ```php
 return [
@@ -164,9 +165,9 @@ return [
 ];
 ```
 
-## Testing
+## Тестирование
 
-For package testing we use `phpunit` framework. Just write into your terminal:
+Для тестирования пакетов используйте в терминале `phpunit`:
 
 ```shell
 $ make build
@@ -174,9 +175,7 @@ $ make install
 $ make test
 ```
 
-## Changes log
+## Лицензия
 
-## License
-
-This is open-sourced software licensed under the MIT License
+Это программное обеспечение с открытым исходным кодом, лицензированное по лицензии MIT.
 
