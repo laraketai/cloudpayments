@@ -49,7 +49,7 @@ $request = $request_builder->buildRequest();
 
 ```php
 use Tamaco\CloudPayments\Config;
-use Tamaco\CloudPayments\Clinet;
+use Tamaco\CloudPayments\Client;
 use GuzzleHttp\Client as GuzzleClient;
 use Psr\Http\Message\ResponseInterface;
 
